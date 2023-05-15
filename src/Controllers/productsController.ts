@@ -32,7 +32,11 @@ export const  getProductId=async(req:Request,res:Response)=>{
 }
 export const  postProduct=async(req:Request,res:Response)=>{
         let {name,description,price,category}=req.body
-        let newProduct=await Products.create({name,description,price,category})
+        let  image=req.file?.filename
+
+        let newProduct=await Products.create({name,
+               description,price,category,image
+              })
         try{
             res.status(201)
             res.json({id:newProduct.id,newProduct})
@@ -44,14 +48,18 @@ export const  postProduct=async(req:Request,res:Response)=>{
 }
 export const  updateProduct=async(req:Request,res:Response)=>{
         let {id}=req.params
-        let {name,description,price,image}=req.body
+
+
+        let {name,description,price}=req.body
         if(name !=='' && description !=='' && price !== 0  ){
             let productId=await Products.findByPk(id)
             if(productId){
                 productId.name=name
                 productId.description=description
                 productId.price=price
-                productId.image=image
+                if (req.file) {
+                    productId.image = req.file.filename;
+                  }
                 await productId.save()
                 res.status(200).json(productId)
             }else{
@@ -66,6 +74,11 @@ export const  updateProduct=async(req:Request,res:Response)=>{
 
 export const  deleteProduct=async(req:Request,res:Response)=>{
         let {id}=req.params
+        let productId=await Products.findByPk(id)
+       if(productId){
         await Products.destroy({where:{id}})
         res.status(200).json({sucess:'produto deletado'})
+       }else{
+        res.status(404).json({erro:'produto já não existe'})
+       }
 }
