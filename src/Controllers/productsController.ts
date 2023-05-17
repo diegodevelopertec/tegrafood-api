@@ -1,8 +1,9 @@
 import { bd } from "./../Instances/index"
 import { Request,Response } from "express"
 import { Products } from "../Models/Products"
+import dotenv from 'dotenv'
 
-
+dotenv.config()
 
 export const  getProductsAll=async(req:Request,res:Response)=>{
   
@@ -32,12 +33,9 @@ export const  getProductId=async(req:Request,res:Response)=>{
 }
 export const  postProduct=async(req:Request,res:Response)=>{
         let {name,description,price,category}=req.body
-        let  image=req.file?.filename
-
-        let newProduct=await Products.create({name,
-               description,price,category,image
-              })
-        try{
+        let  image= req.file?.filename
+     try{
+         let newProduct=await Products.create({name, description,price,category,image })
             res.status(201)
             res.json({id:newProduct.id,newProduct})
         }catch(e){
