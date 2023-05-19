@@ -18,11 +18,11 @@ api.use(Routes)
 api.use('',(req:Request,res:Response)=>{
     res.send(`Bem Vindo á api TegraFood.Aqui você poderá acessar os seguintes eadpoints:
     <ul>
-        <li>GET <i>products</i></li>
-        <li>GET <i>products/:id</i></li>
-        <li>POST  <i>products</i></li>
-        <li>UPDATE  <i>products/:id</i></li>
-        <li>DELETE  <i>products/:id</i></li>
+        <li>GET <i>/products</i></li>
+        <li>GET <i>/products/:id</i></li>
+        <li>POST  <i>/products</i></li>
+        <li>UPDATE  <i>/products/:id</i></li>
+        <li>DELETE  <i>/products/:id</i></li>
     </ul>
     `)
 })

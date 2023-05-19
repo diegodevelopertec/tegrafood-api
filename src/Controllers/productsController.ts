@@ -35,7 +35,7 @@ export const  postProduct=async(req:Request,res:Response)=>{
         let {name,description,price,category}=req.body
         let  image= req.file?.filename
      try{
-         let newProduct=await Products.create({name, description,price,category,image })
+         let newProduct=await Products.create({name, description,price:parseFloat(price),category,image })
             res.status(201)
             res.json({id:newProduct.id,newProduct})
         }catch(e){
