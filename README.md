@@ -23,5 +23,4 @@
         <li>.env: Crie esse arquivo e adicione uma variável chamada <strong>PORT:5000</strong></li>
         <li>Rode o comando 'npm start-dev' para rodar o servidor</li>
         <li>Acesse no seu navegador a rota :'http://localhost:{PORT}/products</li>
-
-       </ul>
+        </ul>
